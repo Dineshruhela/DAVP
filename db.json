@@ -1,10 +1,1 @@
-{
-	"data": [{
-			"username": "admin",
-			"password": "123456"
-		},
-		{
-			"username": "johnny",
-			"password": "123456"
-		}]
-}
+{"data": [{"username": "admin", "password": "123456"}, {"username": "johnny", "password": "123456"}]}
