@@ -1,0 +1,107 @@
+<form [formGroup]="CreateClientForm" (ngSubmit)="createNewClient(CreateClientForm)">
+  <div class="container main mt-2">
+
+
+    <div class="row">
+      <div class="col-md-12 mb-4 text-center">
+        <h3>Client Management</h3>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4 ">
+        <div class="form-group ">
+          
+          <label class="mandatory mb-0" for="ClientName">Client Name</label>
+          <input class="form-control" type="text" id="ClientName" formControlName="ClientName" [ngClass]="(CreateClientForm.get('ClientName').touched && CreateClientForm.get('ClientName').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group ">
+          <label class=" mb-0" for="Address">Client Address</label>
+          <input class="form-control " type="text" formControlName="ClientAddress" id="Address" [ngClass]="(CreateClientForm.get('ClientAddress').touched && CreateClientForm.get('ClientAddress').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class=" col-md-4">
+        <div class="form-group ">
+          <label class=" mb-0" for="Email">Email Id</label>
+          <input class="form-control " type="text" id="Email" formControlName="EmailId" [ngClass]="(CreateClientForm.get('EmailId').touched && CreateClientForm.get('EmailId').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="Designation" class=" mb-0">Designation</label>
+          <input class="form-control" type="text" id="Designation" formControlName="Designation" [ngClass]="(CreateClientForm.get('Designation').touched && CreateClientForm.get('Designation').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+
+      <div class=" col-md-4">
+        <div class="form-group">
+          <label for="cNo" class=" mb-0">Contact No.</label>
+          <input class="form-control " type="text" id="cNo" formControlName="ContactNo" [ngClass]="(CreateClientForm.get('ContactNo').touched && CreateClientForm.get('ContactNo').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="CTPerson" class=" mb-0">Contact Person</label>
+          <input class="form-control" type="text" id="CTPerson" formControlName="ContactPerson" [ngClass]="(CreateClientForm.get('ContactPerson').touched && CreateClientForm.get('ContactPerson').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-12 text-center" *ngIf="!isUpdate.active">
+        <button type="submit" class="btn bg-dark text-light btn-lg mb-2" [disabled]="!CreateClientForm.valid">Save</button>
+      </div>
+      <div class="col-12 text-center" *ngIf="isUpdate.active">
+        <button type="submit" class="btn bg-dark text-light btn-lg mb-2" [disabled]="!CreateClientForm.valid">Update</button>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+
+
+
+<div class="container-fluid">
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="table">
+
+        <table class="table table-bordered table-striped bg-light text-dark">
+          <thead class="thead">
+            <tr class="table bg-primary text-light">
+              <th scope="col">SNo.</th>
+              <th scope="col">ID</th>
+              <th scope="col">Client Name</th>
+              <th scope="col">Designation</th>
+              <th scope="col">Contact Person</th>
+              <th scope="col">Contact No.</th>
+              <th scope="col">Email</th>
+              <th scope="col">Address</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of allClient; let i=index">
+              <th scope="row">{{i+1}}</th>
+              <td scope="row">{{row.ClientId}}</td>
+              <td scope="row">{{row.ClientName}}</td>
+              <td scope="row">{{row.Designation}}</td>
+              <td scope="row">{{row.ContactPerson}}</td>
+              <td scope="row">{{row.ContactNo}}</td>
+              <td scope="row">{{row.EmailId}}</td>
+              <td scope="row">{{row.ClientAddress}}</td>
+              <td scope="row" class="text-center">
+                <button class="btn btn-success py-2" (click)="OnEditRow(row)">Edit</button>
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+.myList{
+    height: 250px;
+    overflow-y: auto;
+}
+
+.languageCard{
+   
+    width: 135px;
+}

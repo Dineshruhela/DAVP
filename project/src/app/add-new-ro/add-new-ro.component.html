@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center pt-4">
+      <h3>Add New Release Orders</h3>
+    </div>
+  </div>
+  <form [formGroup]="ROForm" (ngSubmit)="addRo(ROForm)">
+    <div class="row">
+      <div class="col-md-12  py-4">
+        <div class="row border rounded border-primary py-3">
+          <div class="col-md-4">
+            <label for="RoName">R.O. Name</label>
+            <input type="text" id="RoName" formControlName="RoName" class="form-control mb-3" [ngClass]="(ROForm.get('RoName').touched && ROForm.get('RoName').invalid)?'border-danger ':''">
+            <label for="ClientName">Client Name</label>
+            <!-- <input type="text" id="ClientName" class="form-control mb-3"> -->
+            <select id="ClientName" class="form-control mb-3" formControlName="ClientName" style="height: 46px;" [ngClass]="(ROForm.get('ClientName').touched && ROForm.get('ClientName').invalid)?'border-danger ':''">
+              <option *ngFor="let client of allClients" [value]="client.ClientName">{{client.ClientName}}</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="StartDate">Start Date</label>
+            <input #fd type="date" id="StartDate" formControlName="StartDate" class="form-control mb-3" [ngClass]="(ROForm.get('StartDate').touched && ROForm.get('StartDate').invalid)?'border-danger ':''">
+            <label for="RoStatus">Ro Status</label>
+            <select id="RoStatus" class="form-control mb-3 " formControlName="RoStatus" style="height: 46px;" [ngClass]="(ROForm.get('RoStatus').touched && ROForm.get('RoStatus').invalid)?'border-danger ':''">
+              <option value="Acive">Acive</option>
+              <option value="Inactive">Inactive</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="EndDate">End Date</label>
+            <input type="date" id="EndDate" formControlName="EndDate" class="form-control mb-3" [ngClass]="(ROForm.get('EndDate').touched && ROForm.get('EndDate').invalid)?'border-danger ':''">
+            <div class="text-center p-4 d-flex justify-content-around">
+              <button type="submit" class="btn btn-lg btn-dark p-2 mt-1" style="width: 130px" [disabled]="ROForm.invalid" (click)="action='save'">Save</button>
+              <button type="submit" class="btn btn-lg btn-dark p-2 mt-1" style="width: 130px" [disabled]="ROForm.invalid" (click)="action='draft'">Draft</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="container" *ngIf="!loaded.channel&&!loaded.client&&!loaded.Language">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h1>Please Wait....</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col">
+      <div class="myList">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let row of allChannels;">
+            {{row.ChannelName}}
+            <div class="d-inline float-right material-switch my-2">
+              <input id="forChannel{{row.ChannelId}}" name="role" type="checkbox" [checked]="row.checked" (change)="checkSelfChennel($event,row)"
+              />
+              <label for="forChannel{{row.ChannelId}}" class="bg-primary pull-right" style="top: 5px;"></label>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="col">
+      <div class="myList">
+        <div class="d-inline-block ml-3 mb-1 px-1 border align-middle languageCard " *ngFor="let row of allLanguages;">
+          <div class="d-inline-block my-2">{{row.Language}}</div>
+          <div class="d-inline float-right  material-switch my-2">
+            <input id="forLang{{row.LanguageID}}" name="role" type="checkbox" [checked]="row.checked" (change)="checkSelfLang($event,row)"
+            />
+            <label for="forLang{{row.LanguageID}}" class="bg-primary " style="top: 5px;"></label>
+          </div>
+
+
+        </div>
+      </div>
+      <button class="btn btn-primary btn-sm" (click)="onSelectAll()">All</button>
+      <button class="btn btn-primary btn-sm" (click)="resetlang()">Reset</button>
+    </div>
+    <div class="col">
+      <div class="myList">
+        <ul class="list-group">
+          <li class="list-group-item ">
+            <div class="border-right-1">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Channel</th>
+                    <th scope="col">Languages</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td scope="row">{{chLangList.ChannelName}}</td>
+                    <td scope="row">
+                      <span *ngFor="let lang of chLangList.Languages">{{lang+', '}}</span>
+                    </td>
+                    <td scope="row">
+                      <button class="btn btn-sm text-light bg-primary" *ngIf="chLangList.Languages.length>0||chLangList.ChannelName!=''" (click)="onDelete()">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

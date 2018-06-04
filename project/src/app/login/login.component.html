@@ -1,0 +1,82 @@
+<div class="homepage-hero-module">
+    <div class="video-container">
+        <div class="filter"></div>
+
+        <div class="poster hidden">
+            <img src="" alt="">
+        </div>
+        <div class="container">
+            <div class="row justify-content-center pt-5">
+                <div class="col-md-4 text-center pb-4">
+                    <a href="http://eliteinfonet.com">
+                        <img class="mb-2" src="assets\images\Elite-logo-1.png" alt=""  height="120">
+                    </a>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4 border border-primary rounded" id="login-block">
+                    <div class=" pull-right checkbox mb-3 mt-3">
+                        <h1 class="h3 mb-3 font-weight-normal d-inline">Login</h1>
+                        <div class="d-inline float-right material-switch">
+                            Login as guest.&nbsp;
+                            <input id="forguest" name="role" type="checkbox" (change)='onChange($event)' />
+                            <label for="forguest" class="bg-primary pull-right"></label>
+                        </div>
+
+                    </div>
+                    <form #loginForm="ngForm" [formGroup]="myform" (ngSubmit)="authUser(loginForm)" class="form-signin" *ngIf="this.isGuest">
+
+                        <label for="chname" class="sr-only">Channel Name</label>
+                        <input ngModel type="text" formControlName="chname" id="chname" class="form-control mb-3" placeholder="Channel Name" [ngClass]="(myform.get('chname').touched && myform.get('chname').invalid)?'border-danger border-bottom':''">
+
+                        <label for="gname" class="sr-only">Name</label>
+                        <input ngModel type="text" formControlName="gname" id="gname" class="form-control mb-3" placeholder="Name" name="gname" [ngClass]="(myform.get('gname').touched && myform.get('gname').invalid)?'border-danger border-bottom':''">
+
+
+                        <label for="mobile" class="sr-only ">Mobile No</label>
+                        <input ngModel type="text" formControlName="mobile" id="inputMobile" class="form-control mb-4" name="mobile" placeholder="Mobile No."
+                            [ngClass]="(myform.get('mobile').touched && myform.get('mobile').invalid)?'border-danger border-bottom':''">
+
+
+                        <label for="Email" class="sr-only ">Email address</label>
+                        <input type="email" id="Email" formControlName="email" name="UserName" class="form-control mb-4" placeholder="Email address"
+                            autofocus [ngClass]="(myform.get('email').touched && myform.get('email').invalid)?'border-danger border-bottom':''">
+                        <div *ngIf="this.authservice.isOTPSent">
+                            <label for="OTP" class="sr-only ">Enter OTP</label>
+                            <input type="text" id="OTP" formControlName="OTP" name="OTP" class="form-control mb-4" placeholder="Enter OTP" autofocus
+                                [ngClass]="(myform.get('OTP').touched && myform.get('OTP').invalid)?'border-danger border-bottom':''">
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="d-inline" *ngIf="this.loader">
+                                    <div class="loader" *ngIf="!this.authservice.isOTPSent"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+                        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+                    </form>
+
+                    <form #loginForm="ngForm" [formGroup]="loginAdmin" (ngSubmit)="authUser(loginAdmin)" class="form-signin" *ngIf="!this.isGuest">
+
+                        <label for="UserName" class="sr-only ">Email address</label>
+                        <input type="text" id="UserName" formControlName="UserName" name="UserName" class="form-control mb-4" placeholder="Email address"
+                            autofocus [ngClass]="(loginAdmin.get('UserName').touched && loginAdmin.get('UserName').invalid)?'border-danger border-bottom':''">
+
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" formControlName="Password" name="Password" id="inputPassword" class="form-control mb-3" placeholder="Password"
+                            [ngClass]="(loginAdmin.get('Password').touched && loginAdmin.get('Password').invalid)?'border-danger border-bottom':''">
+
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

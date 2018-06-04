@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <table class="table table-hover mt-5">
+      <thead>
+        <tr>
+          <th scope="col">RO Name</th>
+          <th scope="col">Client Name</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">Languages</th>
+          <th scope="col">Size</th>
+          <th scope="col">Duration</th>
+          <th scope="col">File Name</th>
+          <th scope="col">Download</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of this.auth.allGuestData">
+          <td scope="row">{{row.RoName}}</td>
+          <td scope="row">{{row.ClientName}}</td>
+          <td scope="row">{{row.StartDate}}</td>
+          <td scope="row">{{row.Languages}}</td>
+          <td scope="row">{{row.Size}}</td>
+          <td scope="row">{{row.Duration}}</td>
+          <td scope="row">{{row.FileName}}</td>
+          <td scope="row">
+            <button class="btn btn-success" (click)="downloadFile(row.FileName)">Download</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>

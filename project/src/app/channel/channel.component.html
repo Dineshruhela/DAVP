@@ -1,0 +1,129 @@
+
+<form [formGroup]="channelManagementform" (ngSubmit)="createNewChannel(channelManagementform)">
+  <div class="container main mt-2">
+
+
+    <div class="row">
+      <div class="col-md-12 mb-4 text-center">
+        <h3>Channel Management</h3>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-4 ">
+        <div class="form-group ">
+
+          <label class="mandatory mb-0" for="ChannelName">Channel Name</label>
+          <input class="form-control" type="text" id="ChannelName" formControlName="ChannelName" [ngClass]="(channelManagementform.get('ChannelName').touched && channelManagementform.get('ChannelName').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group ">
+          <label class=" mb-0" for="ContactPerson">Contact Person</label>
+          <input class="form-control " type="text" formControlName="ContactPerson" id="ContactPerson" [ngClass]="(channelManagementform.get('ContactPerson').touched && channelManagementform.get('ContactPerson').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class=" col-md-4">
+        <div class="form-group ">
+          <label class=" mb-0" for="ContactNo">Contact No</label>
+          <input class="form-control " type="text" id="ContactNo" formControlName="ContactNo" [ngClass]="(channelManagementform.get('ContactNo').touched && channelManagementform.get('ContactNo').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="AlternateContactNo" class=" mb-0">Alternate Contact No</label>
+          <input class="form-control" type="text" id="AlternateContactNo" formControlName="AlternateContactNo" [ngClass]="(channelManagementform.get('AlternateContactNo').touched && channelManagementform.get('AlternateContactNo').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="EmailId" class=" mb-0">Email id</label>
+          <input class="form-control" type="text" id="EmailId" formControlName="EmailId" [ngClass]="(channelManagementform.get('EmailId').touched && channelManagementform.get('EmailId').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="Password" class=" mb-0">Password</label>
+          <input class="form-control" type="text" id="Password" formControlName="Password" [ngClass]="(channelManagementform.get('Password').touched && channelManagementform.get('Password').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="AlternateEmailId" class=" mb-0">Alternate email</label>
+          <input class="form-control" type="text" id="AlternateEmailId" formControlName="AlternateEmailId" [ngClass]="(channelManagementform.get('AlternateEmailId').touched && channelManagementform.get('AlternateEmailId').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label class="mandatory mb-0" for="Language">Language</label>
+          <select class="form-control" id="Language" formControlName="Language" [ngClass]="(channelManagementform.get('Language').touched && channelManagementform.get('Language').invalid)?'border-danger border-bottom':''">
+            <option *ngFor="let row of allLanguages" value="{{row.LanguageID}}">{{row.Language}}</option>
+          </select>
+        </div>
+      </div>
+      <div class=" col-md-4">
+        <div class="form-group">
+          <label class="mb-0" for="ChannelGroup">Channel Group</label>
+          <select class="form-control " id="ChannelGroup" formControlName="ChannelGroup">
+            <option selected> Select Channel Group </option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 text-center" *ngIf="!isUpdate.active">
+        <button type="submit" class="btn bg-dark text-light btn-lg mb-2" [disabled]="!channelManagementform.valid">Save</button>
+      </div>
+      <div class="col-12 text-center" *ngIf=" isUpdate.active">
+        <button type="submit" class="btn bg-dark text-light btn-lg mb-2" [disabled]="!channelManagementform.valid">Update</button>
+      </div>
+
+    </div>
+  </div>
+</form>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="table">
+        <table class="table table-bordered table-striped bg-light text-dark">
+          <thead class="thead">
+            <tr class="table bg-primary text-light">
+              <th scope="col">SNo.</th>
+              <th scope="col">ID</th>
+              <th scope="col">Channel Name</th>
+              <th scope="col">Contact Person</th>
+              <th scope="col">Contact No.</th>
+              <th scope="col">Alternate No.</th>
+              <th scope="col">Email</th>
+              <th scope="col">Password</th>
+              <th scope="col">Alternate Email</th>
+              <th scope="col">Language</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of allChannelList; let i=index">
+              <th scope="row">{{i+1}}</th>
+              <td scope="row">{{row.ChannelId}}</td>
+              <td scope="row">{{row.ChannelName}}</td>
+              <td scope="row">{{row.ContactPerson}}</td>
+              <td scope="row">{{row.ContactNo}}</td>
+              <td scope="row">{{row.AlternateContactNo}}</td>
+              <td scope="row">{{row.EmailId}}</td>
+              <td scope="row">{{row.Password}}</td>
+              <td scope="row">{{row.AlternateEmailId}}</td>
+              <td scope="row">{{row.Language}}</td>
+              <td scope="row" class="text-center">
+                <button class="btn btn-success py-2" (click)="OnEditRow(row)">Edit</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

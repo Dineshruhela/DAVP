@@ -1,0 +1,29 @@
+<nav class="navbar navbar-dark " style="background-color: #e3f2fd;" *ngIf="this.auth.isAuthentic">
+    <a class="navbar-brand">
+        <img src="../assets/images/Elite-logo-1.png" alt="Elite" height="80px">
+    </a>
+
+    <div class="pointer">
+        <ul class="nav nav-pills">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{auth.loginUserName}}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" routerLink="home">Home</a>
+                    <a class="dropdown-item" routerLink="clientManagement">Client Management</a>
+                    <a class="dropdown-item" routerLink="channelManagement">Channel Management</a>
+                    <a class="dropdown-item" routerLink="languageManagement">Language Management</a>
+                    <div role="separator" class="dropdown-divider"></div>
+                    <a class="dropdown-item" routerLink="roManagement">RO Management</a>
+                    <div role="separator" class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="onLogout()">Logout</a>
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+</nav>
+<router-outlet></router-outlet>

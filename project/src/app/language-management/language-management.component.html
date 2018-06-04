@@ -1,0 +1,75 @@
+<form [formGroup]="LanguageForm" (ngSubmit)="createNewLanguage(LanguageForm)">
+  <div class="container main mt-2">
+
+
+    <div class="row">
+      <div class="col-md-12 my-4 text-center">
+        <h3>Language Management</h3>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6 ">
+        <div class="form-group ">
+          <label class="mandatory mb-0" for="Language">Language Name</label>
+          <input class="form-control" type="text" id="Language" formControlName="Language" [ngClass]="(LanguageForm.get('Language').touched && LanguageForm.get('Language').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group ">
+          <label class=" mb-0" for="LanguageDescription">Language Description</label>
+          <input class="form-control " type="text" formControlName="LanguageDescription" id="LanguageDescription" [ngClass]="(LanguageForm.get('LanguageDescription').touched && LanguageForm.get('LanguageDescription').invalid)?'border-danger border-bottom':''">
+        </div>
+      </div>
+
+    </div>
+    <div class="col-12 text-center" *ngIf="!isUpdate.active">
+      <button type="submit" class="btn bg-dark text-light btn-lg mb-2" [disabled]="!LanguageForm.valid">Save</button>
+    </div>
+    <div class="col-12 text-center" *ngIf="isUpdate.active">
+      <button type="submit" class="btn bg-dark text-light btn-lg mb-2" [disabled]="!LanguageForm.valid">Update</button>
+    </div>
+
+  </div>
+
+</form>
+
+
+
+
+<div class="container-fluid">
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="table">
+
+        <table class="table table-bordered table-striped bg-light text-dark">
+          <thead class="thead">
+            <tr class="table bg-primary text-light">
+              <th scope="col">SNo.</th>
+              <th scope="col">ID</th>
+              <th scope="col">Language Name</th>
+              <th scope="col">Language Description</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of allLanguages; let i=index">
+              <th scope="row">{{i+1}}</th>
+              <td scope="row">{{row.LanguageID}}</td>
+              <td scope="row">{{row.Language}}</td>
+              <td scope="row">{{row.LanguageDescription}}</td>
+              <td scope="row" class="text-center">
+                <button class="btn btn-success py-2" (click)="OnEditRow(row)">Edit</button>
+              </td>
+
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

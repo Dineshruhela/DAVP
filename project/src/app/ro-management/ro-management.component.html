@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center py-4">
+      <h3>Release Orders List</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-center py-4">
+      <button class="btn btn-primary" (click)="onAddClick() ">Add New RO</button>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <table class="table table-hover mt-5 ">
+      <thead>
+        <tr>
+          <th scope="col">R.O. ID</th>
+          <th scope="col">Ro Name</th>
+          <th scope="col">Client Name</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Status</th>
+          <th scope="col" class="text-center" colspan=2>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of allROData ">
+          <td scope="row">{{row.ROID}}</td>
+          <td scope="row">{{row.ROName}}</td>
+          <td scope="row">{{row.ClientName}}</td>
+          <td scope="row">{{row.StartDate}}</td>
+          <td scope="row">{{row.EndDate}}</td>          
+          <td scope="row">{{row.Status}}</td>
+          <td scope="row" class="text-center"><button class="btn btn-outline-primary p-2">Edit</button><button class="btn btn-outline-primary p-2 ml-2">Copy RO</button></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</div>
